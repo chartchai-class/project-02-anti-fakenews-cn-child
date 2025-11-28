@@ -82,6 +82,21 @@ const form = ref({
   profileImage: ''
 });
 
+const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
+            headers: { 
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        form.value.profileImage = res.data.url;
+    } catch (e) {
+        console.error("Upload failed", e);
+    }
 };
 
 const register = async () => {
@@ -90,7 +105,7 @@ const register = async () => {
     return;
   }
   try {
-    await axios.post('http://localhost:8080/api/auth/register', {
+    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, {
         username: form.value.username,
         password: form.value.password,
         email: form.value.email,
