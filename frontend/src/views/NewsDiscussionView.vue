@@ -229,17 +229,30 @@ const handleFileUpload = async (event) => {
         console.error("Upload failed", e);
     }
 };
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    });
-    // Refresh
-    fetchNews();
-    vote.value = { isFake: null, comment: '', image: null };
-  } catch (e) {
-    console.error(e);
-    alert("Failed to vote");
-  }
+const submitVote = async () => {
+    if (vote.value.isFake === null) {
+        alert("Please select Fake or Real");
+        return;
+    }
+    try {
+        const token = authStore.token;
+        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/votes`, {
+            newsId: route.params.id,
+            isFake: vote.value.isFake,
+            comment: vote.value.comment,
+            image: vote.value.image
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        // Refresh
+        fetchNews();
+        vote.value = { isFake: null, comment: '', image: null };
+    } catch (e) {
+        console.error(e);
+        alert("Failed to vote");
+    }
 };
 
 const deleteVote = async (id) => {
