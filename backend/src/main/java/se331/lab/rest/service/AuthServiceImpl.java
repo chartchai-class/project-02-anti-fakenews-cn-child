@@ -1,0 +1,63 @@
+package se331.lab.rest.service;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+import se331.lab.rest.entity.User;
+import se331.lab.rest.repository.UserRepository;
+import se331.lab.rest.security.JwtTokenProvider;
+import se331.lab.rest.util.AuthResponseDto;
+import se331.lab.rest.util.LoginDto;
+import se331.lab.rest.util.RegisterDto;
+
+@Service
+@RequiredArgsConstructor
+public class AuthServiceImpl implements AuthService {
+
+    private final AuthenticationManager authenticationManager;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
+
+    @Override
+    public AuthResponseDto login(LoginDto loginDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDto.getUsername(),
+                        loginDto.getPassword()));
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtTokenProvider.generateToken(authentication);
+
+        return AuthResponseDto.builder()
+                .accessToken(token)
+                .tokenType("Bearer")
+                .build();
+    }
+
+    @Override
+    public String register(RegisterDto registerDto) {
+        if (userRepository.findByUsername(registerDto.getUsername()).isPresent()) {
+            throw new RuntimeException("Username is already exists!");
+        }
+
+        User user = User.builder()
+                .username(registerDto.getUsername())
+                .password(passwordEncoder.encode(registerDto.getPassword()))
+                .firstname(registerDto.getFirstname())
+                .lastname(registerDto.getLastname())
+                .email(registerDto.getEmail())
+                .role("ROLE_READER") // Always register as READER
+                .profileImage(registerDto.getProfileImage())
+                .build();
+
+        userRepository.save(user);
+
+        return "User registered successfully!";
+    }
+}

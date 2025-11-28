@@ -1,1 +1,143 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/4HfmT0Ys)
+# Social Anti-Fake News System
+
+A full-stack web application designed to combat fake news through community voting, AI analysis, and role-based moderation.
+
+## 🚀 Features
+
+## ✨ Implemented Features
+
+### 1. 🔐 Authentication & Security
+- **JWT-Based Auth**: Secure stateless authentication using JSON Web Tokens.
+- **Role-Based Access Control (RBAC)**:
+  - **Guest**: View public news.
+  - **Reader**: Vote and comment.
+  - **Member**: Create news articles.
+  - **Admin**: Full system management.
+- **Secure Password Storage**: BCrypt encryption for user passwords.
+
+### 2. 📰 News Management System
+- **Dynamic News Feed**: Browse latest news with server-side pagination.
+- **Advanced Filtering**: Filter news by:
+  - **Status**: Real, Fake, or Unknown.
+  - **Keywords**: Full-text search on topics.
+- **Soft Deletion**: Admins can "hide" news instead of permanently deleting it.
+- **Admin Visibility**: Admins have a toggle to view "Hidden/Deleted" news.
+
+### 3. 🗳️ Interactive Voting & Discussion
+- **Community Verdict**: Users vote "Real" or "Fake" on news items.
+- **Visual Analytics**: Dynamic Pie Charts showing the real-time distribution of votes.
+- **Rich Comments**: Users can post comments explaining their vote.
+- **Evidence Upload**: Support for uploading image evidence (stored via Supabase S3) to back up claims.
+- **Paginated Discussions**: Efficient loading of long comment threads with page size selection (5, 10, 20 items).
+
+### 4. 🤖 AI Analysis Integration
+- **Automated Reports**: Each news item generates an "AI Analysis Report".
+- **Confidence Scoring**: Visual progress bars displaying the AI's confidence in its verdict.
+- **Reasoning Engine**: Provides text-based reasoning for the AI's conclusion (Mocked for demo).
+
+### 5. 👑 Admin Dashboard
+- **User Management**: View user list and promote "Readers" to "Members".
+- **Content Moderation**:
+  - Delete inappropriate comments/votes.
+  - Soft delete fake or harmful news articles.
+- **System Oversight**: Access to restricted content and deleted items.
+
+### Technical Highlights
+- **Backend**: Java 17, Spring Boot 3.x, Spring Security (JWT), Spring Data JPA.
+- **Frontend**: Vue.js 3, Tailwind CSS, Pinia, Vue Router, Axios.
+- **Database**: MySQL 8.0 (Dockerized).
+- **Storage**: Supabase Storage (S3 Protocol) for image uploads.
+
+## 🛠️ Technology Stack
+
+- **Backend**:
+  - Java 17
+  - Spring Boot 3.4.0
+  - Spring Security & JJWT
+  - Spring Data JPA
+  - MySQL Driver
+  - AWS SDK v2 (S3)
+  - Lombok, MapStruct
+
+- **Frontend**:
+  - Vue.js 3 (Composition API)
+  - Tailwind CSS
+  - Pinia (State Management)
+  - Vue Router
+  - Chart.js & Vue-Chartjs
+  - Headless UI / Heroicons
+
+- **Infrastructure**:
+  - Docker & Docker Compose
+
+## 📦 Installation & Setup
+
+### Prerequisites
+- Java 17+
+- Node.js 16+
+- Docker & Docker Compose
+
+### 1. Database Setup
+Start the MySQL database using Docker:
+```bash
+docker-compose up -d
+```
+
+### 2. Backend Setup
+Navigate to the backend directory and run the application:
+```bash
+cd backend
+./mvnw spring-boot:run
+```
+The backend will start on `http://localhost:8080`.
+*Note: The application will automatically seed initial data (users, news, votes) on the first run.*
+
+### 3. Frontend Setup
+Navigate to the frontend directory, install dependencies, and start the dev server:
+```bash
+cd frontend
+npm install
+npm run dev
+```
+The frontend will be available at `http://localhost:5173`.
+
+## 🔑 Default Accounts
+
+| Role | Username | Password |
+|------|----------|----------|
+| **Super Admin** | `superadmin` | `password` |
+| **Admin** | `admin` | `password` |
+| **Member** | `member` | `password` |
+| **User** | `user` | `password` |
+
+## 📂 Project Structure
+
+```
+.
+├── backend/                 # Spring Boot Application
+│   ├── src/main/java/       # Java Source Code
+│   │   ├── controller/      # REST Controllers
+│   │   ├── entity/          # JPA Entities
+│   │   ├── repository/      # Data Repositories
+│   │   ├── service/         # Business Logic
+│   │   └── security/        # JWT & Security Config
+│   └── src/main/resources/  # Config (application.yml)
+├── frontend/                # Vue.js Application
+│   ├── src/
+│   │   ├── components/      # Reusable UI Components
+│   │   ├── views/           # Page Views
+│   │   ├── stores/          # Pinia Stores
+│   │   └── router/          # Route Definitions
+└── docker-compose.yml       # Database Configuration
+```
+
+## 📝 API Documentation
+
+- **Auth**: `POST /api/auth/login`, `POST /api/auth/register`
+- **News**: `GET /api/news`, `POST /api/news`, `GET /api/news/{id}`
+- **Votes**: `POST /api/votes`, `DELETE /api/votes/{id}`
+- **Files**: `POST /api/files/upload`
+- **Users**: `GET /api/users`, `PUT /api/users/{id}/role`
+
+---
+*Generated by Antigravity*
