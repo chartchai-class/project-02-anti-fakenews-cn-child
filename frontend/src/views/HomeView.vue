@@ -124,20 +124,6 @@ const fetchNews = async () => {
 }
 
 const handleSearch = debounce(() => {
-    page.value = 0;
-    fetchNews();
-}, 500);
-
-const deleteNews = async (id) => {
-  if (!confirm('Are you sure you want to delete this news?')) return
-  try {
-    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/news/${id}`, {
-      headers: {
-        'Authorization': `Bearer ${authStore.token}`
-      }
-    })
-    alert('News deleted')
-    fetchNews()
   } catch (error) {
     console.error('Delete news failed:', error)
     alert('Failed to delete news')

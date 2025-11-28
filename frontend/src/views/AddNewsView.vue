@@ -48,7 +48,7 @@ const authStore = useAuthStore();
 const submitNews = async () => {
   try {
     const token = authStore.token;
-    await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/news`, news.value, {
+    await axios.post(`/api/news`, news.value, {
         headers: {
             'Authorization': `Bearer ${token}`
         }

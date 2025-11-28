@@ -236,7 +236,7 @@ const submitVote = async () => {
     }
     try {
         const token = authStore.token;
-        await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/votes`, {
+        await axios.post(`/api/votes`, {
             newsId: route.params.id,
             isFake: vote.value.isFake,
             comment: vote.value.comment,

@@ -115,19 +115,6 @@ const analyzeNews = (text) => {
             verdict: 'Real', 
             reasoning: `Contains terminology consistent with verified reporting (${realScore} matches).`, 
             confidence: 60 + (realScore * 10) 
-        };
-    }
-};
-
-const fetchNews = async () => {
-  try {
-    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/news/${route.params.id}`);
-    news.value = res.data;
-    // Trigger analysis
-    setTimeout(() => {
-        analysis.value = analyzeNews(news.value.content + " " + news.value.topic);
-    }, 800); // Simulate processing delay
-  } catch (e) {
     console.error(e);
   }
 };
