@@ -18,7 +18,7 @@ jobs:
           username: ${{ secrets.HOST_USER_NAME }}
           key: ${{ secrets.HOST_SSH_PRIVATE_KEY }}
           port: 22
-          source: "docker-compose.yml,backend/Dockerfile,frontend/Dockerfile,frontend/nginx-vue-app.conf"
+          source: "docker-compose.yml,backend/,frontend/"
           target: "~/project-02-anti-fakenews-cn-child"
 
       - name: Deploy via SSH
