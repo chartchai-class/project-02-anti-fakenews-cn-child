@@ -124,11 +124,9 @@ const fetchNews = async () => {
 }
 
 const handleSearch = debounce(() => {
-  } catch (error) {
-    console.error('Delete news failed:', error)
-    alert('Failed to delete news')
-  }
-}
+    page.value = 0;
+    fetchNews();
+}, 500);
 
 const setFilter = (newFilter) => {
   filter.value = newFilter

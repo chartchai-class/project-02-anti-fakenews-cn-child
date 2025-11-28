@@ -98,6 +98,19 @@ const handleFileUpload = async (event) => {
         console.error("Upload failed", e);
     }
 };
+const register = async () => {
+  if (form.value.password !== form.value.confirmPassword) {
+    error.value = "Passwords do not match!";
+    return;
+  }
+  try {
+    await axios.post(`/api/auth/register`, {
+        username: form.value.username,
+        password: form.value.password,
+        email: form.value.email,
+        firstname: form.value.firstname,
+        lastname: form.value.lastname,
+        role: role.value,
         profileImage: form.value.profileImage
     });
     alert("Registration successful! Please login.");

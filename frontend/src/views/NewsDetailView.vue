@@ -115,8 +115,8 @@ const analyzeNews = (text) => {
             verdict: 'Real', 
             reasoning: `Contains terminology consistent with verified reporting (${realScore} matches).`, 
             confidence: 60 + (realScore * 10) 
-    console.error(e);
-  }
+        };
+    }
 };
 
 const deleteNews = async () => {
