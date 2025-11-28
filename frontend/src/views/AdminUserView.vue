@@ -55,7 +55,7 @@ const authStore = useAuthStore();
 
 const fetchUsers = async () => {
     try {
-        const res = await axios.get('http://localhost:8080/api/users', {
+        const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/users`, {
             headers: { 'Authorization': `Bearer ${authStore.token}` }
         });
         users.value = res.data;
@@ -67,7 +67,7 @@ const fetchUsers = async () => {
 const promoteUser = async (user, newRole) => {
     if (!confirm(`Are you sure you want to change ${user.username}'s role to ${newRole}?`)) return;
     try {
-        await axios.put(`http://localhost:8080/api/users/${user.id}/role`, newRole, {
+        await axios.put(`${import.meta.env.VITE_BACKEND_URL}/api/users/${user.id}/role`, newRole, {
             headers: { 
                 'Authorization': `Bearer ${authStore.token}`,
                 'Content-Type': 'text/plain'

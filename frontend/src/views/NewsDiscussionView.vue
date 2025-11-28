@@ -197,7 +197,7 @@ const chartOptions = {
 
 const fetchNews = async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/news/${route.params.id}`);
+    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/news/${route.params.id}`);
     news.value = res.data;
     votes.value = res.data.votes || [];
     
@@ -219,7 +219,7 @@ const handleFileUpload = async (event) => {
     const formData = new FormData();
     formData.append('file', file);
     try {
-        const res = await axios.post('http://localhost:8080/api/files/upload', formData, {
+        const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/files/upload`, formData, {
             headers: { 
                 'Content-Type': 'multipart/form-data'
             }
@@ -229,18 +229,6 @@ const handleFileUpload = async (event) => {
         console.error("Upload failed", e);
     }
 };
-
-const submitVote = async () => {
-  if (vote.value.isFake === null) return alert("Please select Fake or Real");
-  try {
-    const token = authStore.token;
-    await axios.post('http://localhost:8080/api/votes', {
-      newsId: news.value.id,
-      userId: authStore.user.id,
-      isFake: vote.value.isFake,
-      comment: vote.value.comment,
-      image: vote.value.image
-    }, {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -258,7 +246,7 @@ const deleteVote = async (id) => {
     if(!confirm("Delete this comment?")) return;
     try {
         const token = authStore.token;
-        await axios.delete(`http://localhost:8080/api/votes/${id}`, {
+        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/votes/${id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

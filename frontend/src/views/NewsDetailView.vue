@@ -121,7 +121,7 @@ const analyzeNews = (text) => {
 
 const fetchNews = async () => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/news/${route.params.id}`);
+    const res = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/news/${route.params.id}`);
     news.value = res.data;
     // Trigger analysis
     setTimeout(() => {
@@ -136,7 +136,7 @@ const deleteNews = async () => {
     if(!confirm("Are you sure?")) return;
     try {
         const token = authStore.token;
-        await axios.delete(`http://localhost:8080/api/news/${news.value.id}`, {
+        await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/news/${news.value.id}`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

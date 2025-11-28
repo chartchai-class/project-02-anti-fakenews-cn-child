@@ -14,7 +14,7 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async login(credentials) {
             try {
-                const response = await axios.post('http://localhost:8080/api/auth/login', credentials)
+                const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/login`, credentials)
                 this.token = response.data.accessToken
                 localStorage.setItem('token', this.token)
 
@@ -31,7 +31,7 @@ export const useAuthStore = defineStore('auth', {
         },
         async register(userData) {
             try {
-                await axios.post('http://localhost:8080/api/auth/register', userData)
+                await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/auth/register`, userData)
                 return true
             } catch (error) {
                 console.error('Registration failed', error)

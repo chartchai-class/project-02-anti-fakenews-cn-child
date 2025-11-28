@@ -103,7 +103,7 @@ const debounce = (fn, delay) => {
 const fetchNews = async () => {
   loading.value = true
   try {
-    let url = `http://localhost:8080/api/news?page=${page.value}&size=${pageSize.value}`
+    let url = `${import.meta.env.VITE_BACKEND_URL}/api/news?page=${page.value}&size=${pageSize.value}`
     
     if (searchKeyword.value) {
         url += `&keyword=${encodeURIComponent(searchKeyword.value)}`
@@ -131,7 +131,7 @@ const handleSearch = debounce(() => {
 const deleteNews = async (id) => {
   if (!confirm('Are you sure you want to delete this news?')) return
   try {
-    await axios.delete(`http://localhost:8080/api/news/${id}`, {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/news/${id}`, {
       headers: {
         'Authorization': `Bearer ${authStore.token}`
       }

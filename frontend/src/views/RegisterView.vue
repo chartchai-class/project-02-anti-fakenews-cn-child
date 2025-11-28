@@ -82,20 +82,6 @@ const form = ref({
   profileImage: ''
 });
 
-const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-    const formData = new FormData();
-    formData.append('file', file);
-    try {
-        const res = await axios.post('http://localhost:8080/api/files/upload', formData, {
-            headers: { 'Content-Type': 'multipart/form-data' }
-        });
-        form.value.profileImage = res.data.url;
-    } catch (e) {
-        console.error("Upload failed", e);
-        error.value = 'Profile image upload failed.';
-    }
 };
 
 const register = async () => {
