@@ -134,5 +134,17 @@ const deleteNews = async () => {
     }
 }
 
+const fetchNews = async () => {
+    try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/news/${route.params.id}`);
+        news.value = response.data;
+        if (news.value && news.value.content) {
+            analysis.value = analyzeNews(news.value.content);
+        }
+    } catch (error) {
+        console.error('Error fetching news details:', error);
+    }
+}
+
 onMounted(fetchNews);
 </script>
