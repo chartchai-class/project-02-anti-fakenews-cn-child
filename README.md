@@ -4,6 +4,8 @@ Group Information
 
 Group Name: child
 TianZiming（Rushford） 20232066 leader
+JinYitong(S1mple) 20232035 member
+YanWeisen(Rance) 20232038 member
 
 
 Project Description
@@ -55,6 +57,6 @@ Repositories:
 - Frontend & Backend: https://github.com/chartchai-class/project-02-anti-fakenews-cn-child.git
 
 Presentation Video
-
+- YouTube video link：https://www.youtube.com/watch?v=dUxJ-FRz5rw
 
 
