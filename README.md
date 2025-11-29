@@ -47,17 +47,14 @@ The application is implemented using the following technologies:
 
 Deployment & CI/CD
 
-- Live Demo: http://119.91.69.247/
+- Deployment Address: http://119.91.69.247/
 - CI/CD Pipeline: The automated CD must be set up. We use GitHub Actions to automatically build and deploy the application to our Tencent Cloud VM whenever changes are pushed to the `main` branch.
 
 
 Repositories:
-- Frontend & Backend: [INSERT GIT URL]
+- Frontend & Backend: https://github.com/chartchai-class/project-02-anti-fakenews-cn-child.git
 
 Presentation Video
 
-[INSERT VIDEO LINK HERE]
-(Description: A 5-minute video presenting the application features and functionality.)
 
----
-Updated: 10th November 2025
+
