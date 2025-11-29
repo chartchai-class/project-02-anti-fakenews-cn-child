@@ -155,6 +155,22 @@ const changePage = (newPage) => {
   }
 }
 
+const deleteNews = async (id) => {
+  if (!confirm('Are you sure you want to delete this news?')) return
+
+  try {
+    await axios.delete(`${import.meta.env.VITE_BACKEND_URL}/api/news/${id}`, {
+      headers: {
+        Authorization: `Bearer ${authStore.token}`
+      }
+    })
+    fetchNews()
+  } catch (error) {
+    console.error('Error deleting news:', error)
+    alert('Failed to delete news')
+  }
+}
+
 onMounted(() => {
   fetchNews()
 })
