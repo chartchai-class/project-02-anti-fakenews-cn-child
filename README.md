@@ -8,6 +8,11 @@ JinYitong(S1mple) 20232035 member
 YanWeisen(Rance) 20232038 member
 
 
+Super Administrator：
+account：admin
+password：password
+
+
 Project Description
 The Social Anti-Fake News system is a system that requires the wisdom of the cloud to help detect fake news. The users who heard the news can enter the news into the system, so the other users can see all the news. The other users can look at the news and vote whether this news is fake or not, and put their comments on why they think this is fake or not. The news is considered fake or not fake by the number of votes. So on the list of news page, users can filter all news, fake news, or non-fake news.
 
@@ -57,6 +62,5 @@ Repositories:
 - Frontend & Backend: https://github.com/chartchai-class/project-02-anti-fakenews-cn-child.git
 
 Presentation Video
-- YouTube video link：https://www.youtube.com/watch?v=dUxJ-FRz5rw
-
-
+- YouTube video link：https://youtu.be/dUxJ-FRz5rw
+- YouTube Additional video link：https://youtu.be/etckeKeC_aE
