@@ -1,143 +1,63 @@
-# Social Anti-Fake News System
+Social Anti-Fake News System Phase II
 
-A full-stack web application designed to combat fake news through community voting, AI analysis, and role-based moderation.
+Group Information
 
-## 🚀 Features
+Group Name: child
+TianZiming（Rushford） 20232066 leader
 
-## ✨ Implemented Features
 
-### 1. 🔐 Authentication & Security
-- **JWT-Based Auth**: Secure stateless authentication using JSON Web Tokens.
-- **Role-Based Access Control (RBAC)**:
-  - **Guest**: View public news.
-  - **Reader**: Vote and comment.
-  - **Member**: Create news articles.
-  - **Admin**: Full system management.
-- **Secure Password Storage**: BCrypt encryption for user passwords.
+Project Description
+The Social Anti-Fake News system is a system that requires the wisdom of the cloud to help detect fake news. The users who heard the news can enter the news into the system, so the other users can see all the news. The other users can look at the news and vote whether this news is fake or not, and put their comments on why they think this is fake or not. The news is considered fake or not fake by the number of votes. So on the list of news page, users can filter all news, fake news, or non-fake news.
 
-### 2. 📰 News Management System
-- **Dynamic News Feed**: Browse latest news with server-side pagination.
-- **Advanced Filtering**: Filter news by:
-  - **Status**: Real, Fake, or Unknown.
-  - **Keywords**: Full-text search on topics.
-- **Soft Deletion**: Admins can "hide" news instead of permanently deleting it.
-- **Admin Visibility**: Admins have a toggle to view "Hidden/Deleted" news.
 
-### 3. 🗳️ Interactive Voting & Discussion
-- **Community Verdict**: Users vote "Real" or "Fake" on news items.
-- **Visual Analytics**: Dynamic Pie Charts showing the real-time distribution of votes.
-- **Rich Comments**: Users can post comments explaining their vote.
-- **Evidence Upload**: Support for uploading image evidence (stored via Supabase S3) to back up claims.
-- **Paginated Discussions**: Efficient loading of long comment threads with page size selection (5, 10, 20 items).
+Features
 
-### 4. 🤖 AI Analysis Integration
-- **Automated Reports**: Each news item generates an "AI Analysis Report".
-- **Confidence Scoring**: Visual progress bars displaying the AI's confidence in its verdict.
-- **Reasoning Engine**: Provides text-based reasoning for the AI's conclusion (Mocked for demo).
+Home Page & News Management
+The system consists of the home page, which will show the list of news and a filter to select what kind of news to see. The user must be able to select the amount of news they want to see on each page.
+The details of each news story on this home page must include the news topic, a short detail of the news, the status of the news, whether fake or not, the name of the reporter, and the date and time of the report.
 
-### 5. 👑 Admin Dashboard
-- **User Management**: View user list and promote "Readers" to "Members".
-- **Content Moderation**:
-  - Delete inappropriate comments/votes.
-  - Soft delete fake or harmful news articles.
-- **System Oversight**: Access to restricted content and deleted items.
+News Details & Interaction
+When the user selects the news that they want to see the details, the application should show the new with the full details such as the news topic, a short detail of the news, the status of the news, whether fake or not fake, the name of the reporter, the date of time of the report, and upload the image of the event.
+From this page, the user can open the list of comments and the results that other people have voted and commented on. In this part, the pagination must be applied.
+The user can click on another page to vote on the news, the user has to vote whether the news is fake or not, and add a comment or an image that you think can convince your choice.
 
-### Technical Highlights
-- **Backend**: Java 17, Spring Boot 3.x, Spring Security (JWT), Spring Data JPA.
-- **Frontend**: Vue.js 3, Tailwind CSS, Pinia, Vue Router, Axios.
-- **Database**: MySQL 8.0 (Dockerized).
-- **Storage**: Supabase Storage (S3 Protocol) for image uploads.
+User Roles & Authentication
+- Registration: The user can register their information and initially the reader. The register information must include name, surname, email address, password, and profile image.
+- Reader: The reader only can see the news but can vote but cannot send the news.
+- Member: The administrator can set the selected user to be the member. The members can vote the news and also submit the new news.
+- Administrator: The administrator can remove the news or remove some comments which is not proper. When the news is removed, no one except the administrator can see it. If the vote has been removed the score must be recalculated using the score which is still available.
 
-## 🛠️ Technology Stack
+Search
+All user can search by all details of the news (topic name, short details of the news, name of the reporter) or search by the status of the news.
 
-- **Backend**:
-  - Java 17
-  - Spring Boot 3.4.0
-  - Spring Security & JJWT
-  - Spring Data JPA
-  - MySQL Driver
-  - AWS SDK v2 (S3)
-  - Lombok, MapStruct
+Unique Features
+- AI Analysis: The system integrates AI to analyze news content, providing an automated credibility assessment to assist users in their judgment.
+- Interactive Charts: Real-time Pie Charts visualize the voting distribution (Fake vs. Real), giving users an immediate understanding of community consensus.
 
-- **Frontend**:
-  - Vue.js 3 (Composition API)
-  - Tailwind CSS
-  - Pinia (State Management)
-  - Vue Router
-  - Chart.js & Vue-Chartjs
-  - Headless UI / Heroicons
 
-- **Infrastructure**:
-  - Docker & Docker Compose
+Technology Stack
 
-## 📦 Installation & Setup
+The application is implemented using the following technologies:
 
-### Prerequisites
-- Java 17+
-- Node.js 16+
-- Docker & Docker Compose
+- Frontend: Vue.js 3 (Composition API), Tailwind CSS, Pinia, Vue Router, Axios.
+- Backend: Java 17, Spring Boot 3.x, Spring Security (JWT), Spring Data JPA.
+- Database: MySQL 8.0.
+- Storage: Supabase Storage (S3 Protocol) for image uploads.
+- DevOps: Docker, GitHub Actions (CI/CD).
 
-### 1. Database Setup
-Start the MySQL database using Docker:
-```bash
-docker-compose up -d
-```
+Deployment & CI/CD
 
-### 2. Backend Setup
-Navigate to the backend directory and run the application:
-```bash
-cd backend
-./mvnw spring-boot:run
-```
-The backend will start on `http://localhost:8080`.
-*Note: The application will automatically seed initial data (users, news, votes) on the first run.*
+- Live Demo: http://119.91.69.247/
+- CI/CD Pipeline: The automated CD must be set up. We use GitHub Actions to automatically build and deploy the application to our Tencent Cloud VM whenever changes are pushed to the `main` branch.
 
-### 3. Frontend Setup
-Navigate to the frontend directory, install dependencies, and start the dev server:
-```bash
-cd frontend
-npm install
-npm run dev
-```
-The frontend will be available at `http://localhost:5173`.
 
-## 🔑 Default Accounts
+Repositories:
+- Frontend & Backend: [INSERT GIT URL]
 
-| Role | Username | Password |
-|------|----------|----------|
-| **Super Admin** | `superadmin` | `password` |
-| **Admin** | `admin` | `password` |
-| **Member** | `member` | `password` |
-| **User** | `user` | `password` |
+Presentation Video
 
-## 📂 Project Structure
-
-```
-.
-├── backend/                 # Spring Boot Application
-│   ├── src/main/java/       # Java Source Code
-│   │   ├── controller/      # REST Controllers
-│   │   ├── entity/          # JPA Entities
-│   │   ├── repository/      # Data Repositories
-│   │   ├── service/         # Business Logic
-│   │   └── security/        # JWT & Security Config
-│   └── src/main/resources/  # Config (application.yml)
-├── frontend/                # Vue.js Application
-│   ├── src/
-│   │   ├── components/      # Reusable UI Components
-│   │   ├── views/           # Page Views
-│   │   ├── stores/          # Pinia Stores
-│   │   └── router/          # Route Definitions
-└── docker-compose.yml       # Database Configuration
-```
-
-## 📝 API Documentation
-
-- **Auth**: `POST /api/auth/login`, `POST /api/auth/register`
-- **News**: `GET /api/news`, `POST /api/news`, `GET /api/news/{id}`
-- **Votes**: `POST /api/votes`, `DELETE /api/votes/{id}`
-- **Files**: `POST /api/files/upload`
-- **Users**: `GET /api/users`, `PUT /api/users/{id}/role`
+[INSERT VIDEO LINK HERE]
+(Description: A 5-minute video presenting the application features and functionality.)
 
 ---
-*Generated by Antigravity*
+Updated: 10th November 2025
