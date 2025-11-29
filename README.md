@@ -3,7 +3,7 @@ Social Anti-Fake News System Phase II
 Group Information
 
 Group Name: child
-TianZiming（Rushford） 20232066 leader
+TianZiming（child） 20232066 leader
 JinYitong(S1mple) 20232035 member
 YanWeisen(Rance) 20232038 member
 
